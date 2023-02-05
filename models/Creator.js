@@ -30,7 +30,13 @@ const CreatorSchema = new Schema(
       required: false,
       unique: false,
     },
-    friends: {
+    followers: {
+      type: Array,
+      default: [],
+      required: false,
+      unique: false,
+    },
+    followings: {
       type: Array,
       default: [],
       required: false,
@@ -40,6 +46,39 @@ const CreatorSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    bio: {
+      type: String,
+      default: '',
+      required: false,
+      unique: false,
+      max: 150,
+    },
+    city: {
+      type: String,
+      default: '',
+      required: false,
+      unique: false,
+      max: 50,
+    },
+    country: {
+      type: String,
+      default: '',
+      required: false,
+      unique: false,
+      max: 50,
+    },
+    birthday: {
+      type: Date,
+      default: '',
+      required: false,
+      unique: false,
+    },
+    job: {
+      type: String,
+      enum: ['Etudiant', 'Salarié', 'Indépendant', 'Autre'],
+      default: 'Etudiant',
+    },
+    creations: [{ type: Schema.Types.ObjectId, ref: 'Creation' }],
   },
   { timestamps: true }
 );

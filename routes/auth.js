@@ -22,7 +22,25 @@ router.post('/register', async (req, res) => {
     const creator = await newCreator.save();
     res.status(200).json(creator);
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+// Page de connexion d'un créateur
+
+router.post('/login', async (req, res) => {
+  try {
+    const creator = await Creator.findOne({ email: req.body.email });
+    !creator && res.status(404).json('Utilisateur non trouvé');
+    req.send(creator);
+
+    const isvalidPassword = await bcrypt.compare(
+      req.body.password,
+      creator.password
+    );
+    !isvalidPassword && res.status(400).json('Mot de passe incorrect');
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 

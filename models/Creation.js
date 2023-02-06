@@ -6,7 +6,6 @@ const CreatorSchema = new Schema(
     creatorId: {
       type: String,
       required: true,
-      unique: true,
     },
     title: {
       type: String,
